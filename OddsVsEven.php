@@ -1,75 +1,85 @@
 <?php
-
-
-function battle($battleFieldConfiguration)
+/**
+** Procedural function which count number of zeros and number of ones.
+** Zeros represent evens soldiers and ones represent odds soldiers.
+**/
+function battle($battle_field_configuration)
 {
-	$battleFieldConfTabSize = count($battleFieldConfiguration);
-	$numberOfAllPositiveZeros = 0;
-	$numberOfAllNegativeZeros = 0;
-	$numberOfAllPositiveOnes = 0;
-	$numberOfAllNegativeOnes = 0;
+	$number_of_all_positive_zeros = 0;
+	$number_of_all_negative_zeros = 0;
+	$number_of_all_positive_ones = 0;
+	$number_of_all_negative_ones = 0;
+	$battle_field_conf_tab_size = count($battle_field_configuration);
 
-	for($i  = 0; $i < $battleFieldConfTabSize; $i++)
+	for($i = 0; $i < $battle_field_conf_tab_size; $i++)
 	{
-		// evens
-		if($battleFieldConfiguration[$i] % 2 == 0)
+		// evens soldiers
+		if($battle_field_configuration[$i] % 2 == 0)
 		{
-			if($battleFieldConfiguration[$i] >= 0)
+			if($battle_field_configuration[$i] >= 0)
 			{
-				$binaryRepresentation = decbin($battleFieldConfiguration[$i]);
+				$binary_representation = decbin($battle_field_configuration[$i]);
 				// number of positive zeros
-				$numberOfPositiveZeros = substr_count($binaryRepresentation, '0');
-				$numberOfAllPositiveZeros = $numberOfAllPositiveZeros + $numberOfPositiveZeros;
+				$number_of_positive_zeros = substr_count($binary_representation, '0');
+				$number_of_all_positive_zeros = $number_of_all_positive_zeros + $number_of_positive_zeros;
 			}
 			else
 			{
-				$numberAbs = abs($battleFieldConfiguration[$i]);
-				$binaryRepresentation = decbin($numberAbs);
+				$abs_number = abs($battle_field_configuration[$i]);
+				$binary_representation = decbin($abs_number);
 				// number of negative zeros
-				$numberOfNegativeZeros = substr_count($binaryRepresentation, '0');
-				$numberOfAllNegativeZeros = $numberOfAllNegativeZeros + $numberOfNegativeZeros;
+				$number_of_negative_zeros = substr_count($binary_representation, '0');
+				$number_of_all_negative_zeros = $number_of_all_negative_zeros + $number_of_negative_zeros;
 			}
 		}
-		// odds
+		// odds soldiers
 		else
 		{
-			if($battleFieldConfiguration[$i] >= 0)
+			if($battle_field_configuration[$i] >= 0)
 			{
-				$binaryRepresentation2 = decbin($battleFieldConfiguration[$i]);
+				$binary_representation = decbin($battle_field_configuration[$i]);
 				// number of positive ones
-				$numberOfPositiveOnes = substr_count($binaryRepresentation2, '1');
-				$numberOfAllPositiveOnes = $numberOfAllPositiveOnes + $numberOfPositiveOnes;
+				$number_of_positive_ones = substr_count($binary_representation, '1');
+				$number_of_all_positive_ones = $number_of_all_positive_ones + $number_of_positive_ones;
 			}
 			else
 			{
-				$numberAbs = abs($battleFieldConfiguration[$i]);
-				$binaryRepresentation3 = decbin($numberAbs);
+				$abs_number = abs($battle_field_configuration[$i]);
+				$binary_representation = decbin($abs_number);
 				// number of negative ones
-				$numberOfNegativeOnes = substr_count($binaryRepresentation3, '1');
-				$numberOfAllNegativeOnes = $numberOfAllNegativeOnes + $numberOfNegativeOnes;
-			}			
+				$number_of_negative_ones = substr_count($binary_representation, '1');
+				$number_of_all_negative_ones = $number_of_all_negative_ones + $number_of_negative_ones;
+			}
 		}
 	}
-	battleResult($numberOfAllPositiveZeros, $numberOfAllNegativeZeros, $numberOfAllPositiveOnes, $numberOfAllNegativeOnes);
+	battle_result($number_of_all_positive_zeros, $number_of_all_negative_zeros, $number_of_all_positive_ones, $number_of_all_negative_ones);
 }
 
-
-function battleResult($numberOfAllPositiveZeros, $numberOfAllNegativeZeros, $numberOfAllPositiveOnes, $numberOfAllNegativeOnes)
+/**
+** Procedural function which print battle result.
+**/
+function battle_result($number_of_all_positive_zeros, $number_of_all_negative_zeros, $number_of_all_positive_ones, $number_of_all_negative_ones)
 {
-	$numberOfAllZeros = $numberOfAllPositiveZeros -$numberOfAllNegativeZeros;
-	$numberOfAllOnes = $numberOfAllPositiveOnes - $numberOfAllNegativeOnes;
+	$number_of_all_zeros = $number_of_all_positive_zeros - $number_of_all_negative_zeros;
+	$number_of_all_ones = $number_of_all_positive_ones - $number_of_all_negative_ones;
 
-	if($numberOfAllOnes > $numberOfAllZeros)
+	if($number_of_all_ones > $number_of_all_zeros)
 	{
-		echo 'odds win' . ' ' . $numberOfAllPositiveOnes . ' - ' . $numberOfAllNegativeOnes . ' VS ' . $numberOfAllPositiveZeros. ' - ' . $numberOfAllNegativeZeros . '<br>';;
+		echo
+			'odds win' . ' ' . $number_of_all_positive_ones . ' - ' . $number_of_all_negative_ones .
+			' VS ' . $number_of_all_positive_zeros. ' - ' . $number_of_all_negative_zeros . '<br>';
 	}
-	else if($numberOfAllOnes < $numberOfAllZeros)
+	else if($number_of_all_ones < $number_of_all_zeros)
 	{
-		echo 'evens win' . ' ' . $numberOfAllPositiveOnes . ' - ' . $numberOfAllNegativeOnes . ' VS ' . $numberOfAllPositiveZeros. ' - ' . $numberOfAllNegativeZeros . '<br>';
+		echo
+			'evens win' . ' ' . $number_of_all_positive_ones . ' - ' . $number_of_all_negative_ones .
+			' VS ' . $number_of_all_positive_zeros. ' - ' . $number_of_all_negative_zeros . '<br>';
 	}
 	else
 	{
-		echo 'tie' . ' ' . $numberOfAllPositiveOnes . ' - ' . $numberOfAllNegativeOnes . ' VS ' . $numberOfAllPositiveZeros. ' - ' . $numberOfAllNegativeZeros . '<br>';;
+		echo
+			'tie' . ' ' . $number_of_all_positive_ones . ' - ' . $number_of_all_negative_ones .
+			' VS ' . $number_of_all_positive_zeros. ' - ' . $number_of_all_negative_zeros . '<br>';
 	}
 }
 
