@@ -87,18 +87,15 @@ function battle_result($evens_result, $odds_result)
 {
 	if($odds_result > $evens_result)
 	{
-		echo
-			'odds win' . ' ' . $odds_result . ' vs ' . $evens_result . '<br>';
+		echo 'odds win' . ' ' . $odds_result . ' vs ' . $evens_result . '<br>';
 	}
 	else if($odds_result < $evens_result)
 	{
-		echo
-			'evens win' . ' ' . $odds_result . ' vs ' . $evens_result . '<br>';
+		echo 'evens win' . ' ' . $odds_result . ' vs ' . $evens_result . '<br>';
 	}
 	else
 	{
-		echo
-			'tie' . ' ' . $odds_result . ' vs ' . $evens_result . '<br>';
+		echo 'tie' . ' ' . $odds_result . ' vs ' . $evens_result . '<br>';
 	}
 }
 
