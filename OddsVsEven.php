@@ -5,24 +5,24 @@
 *  Zeros represents evens soldiers and ones represents odds soldiers.
 */
 function battle($battle_field_configuration)
-{
-	$number_of_all_zeros = 0;
-	$number_of_all_ones = 0;
-	
+{	
 	if(!check_input($battle_field_configuration))
 	{
 		echo 'incorrect input<br>';
 		return;
 	}
 
+	$number_of_all_zeros = 0;
+	$number_of_all_ones = 0;
+
 	foreach($battle_field_configuration as $one_number)
 	{
 		$abs_number = abs($one_number);
 		$binary_representation = decbin($abs_number);
 
-		// evens soldiers
 		if($one_number % 2 == 0)
 		{
+			// evens soldiers
 			if($one_number >= 0)
 			{
 				// number of positive zeros
@@ -36,9 +36,9 @@ function battle($battle_field_configuration)
 				$number_of_all_zeros -= $number_of_negative_zeros;
 			}
 		}
-		// odds soldiers
 		else
 		{
+			// odds soldiers
 			if($one_number >= 0)
 			{
 				// number of positive ones
