@@ -1,68 +1,59 @@
 <?php
 
 /**
-*  Procedural function which count number of zeros and number of ones.
-*  Zeros represent evens soldiers and ones represent odds soldiers.
+*  Procedural function which counts the number of zeros and the number of ones.
+*  Zeros represents evens soldiers and ones represents odds soldiers.
 */
 function battle($battle_field_configuration)
 {
-	$number_of_all_positive_zeros = 0;
-	$number_of_all_negative_zeros = 0;
-	$number_of_all_positive_ones = 0;
-	$number_of_all_negative_ones = 0;
-	$battle_field_conf_tab_size = count($battle_field_configuration);
+	$number_of_all_zeros = 0;
+	$number_of_all_ones = 0;
 	
-	if(check_input($battle_field_configuration))
-	{
-		for($i = 0; $i < $battle_field_conf_tab_size; $i++)
-		{	
-			// evens soldiers
-			if($battle_field_configuration[$i] % 2 == 0)
-			{
-				if($battle_field_configuration[$i] >= 0)
-				{
-					$binary_representation = decbin($battle_field_configuration[$i]);
-					// number of positive zeros
-					$number_of_positive_zeros = substr_count($binary_representation, '0');
-					$number_of_all_positive_zeros = $number_of_all_positive_zeros + $number_of_positive_zeros;
-				}
-				else
-				{
-					$abs_number = abs($battle_field_configuration[$i]);
-					$binary_representation = decbin($abs_number);
-					// number of negative zeros
-					$number_of_negative_zeros = substr_count($binary_representation, '0');
-					$number_of_all_negative_zeros = $number_of_all_negative_zeros + $number_of_negative_zeros;
-				}
-			}
-			// odds soldiers
-			else
-			{
-				if($battle_field_configuration[$i] >= 0)
-				{
-					$binary_representation = decbin($battle_field_configuration[$i]);
-					// number of positive ones
-					$number_of_positive_ones = substr_count($binary_representation, '1');
-					$number_of_all_positive_ones = $number_of_all_positive_ones + $number_of_positive_ones;
-				}
-				else
-				{
-					$abs_number = abs($battle_field_configuration[$i]);
-					$binary_representation = decbin($abs_number);
-					// number of negative ones
-					$number_of_negative_ones = substr_count($binary_representation, '1');
-					$number_of_all_negative_ones = $number_of_all_negative_ones + $number_of_negative_ones;
-				}
-			}
-		}
-		$evens_result = $number_of_all_positive_zeros - $number_of_all_negative_zeros; 
-		$odds_result = $number_of_all_positive_ones - $number_of_all_negative_ones;
-		battle_result($evens_result, $odds_result);
-	}
-	else
+	if(!check_input($battle_field_configuration))
 	{
 		echo 'incorrect input<br>';
+		return;
 	}
+
+	foreach($battle_field_configuration as $one_number)
+	{
+		$abs_number = abs($one_number);
+		$binary_representation = decbin($abs_number);
+
+		// evens soldiers
+		if($one_number % 2 == 0)
+		{
+			if($one_number >= 0)
+			{
+				// number of positive zeros
+				$number_of_positive_zeros = substr_count($binary_representation, '0');
+				$number_of_all_zeros += $number_of_positive_zeros;
+			}
+			else
+			{
+				// number of negative zeros
+				$number_of_negative_zeros = substr_count($binary_representation, '0');
+				$number_of_all_zeros -= $number_of_negative_zeros;
+			}
+		}
+		// odds soldiers
+		else
+		{
+			if($one_number >= 0)
+			{
+				// number of positive ones
+				$number_of_positive_ones = substr_count($binary_representation, '1');
+				$number_of_all_ones += $number_of_positive_ones;
+			}
+			else
+			{
+				// number of negative ones
+				$number_of_negative_ones = substr_count($binary_representation, '1');
+				$number_of_all_ones -= $number_of_negative_ones;
+			}
+		}
+	}
+	battle_result($number_of_all_zeros, $number_of_all_ones);
 }
 
 /**
