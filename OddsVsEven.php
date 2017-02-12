@@ -23,37 +23,53 @@ function battle($battle_field_configuration)
 		if($one_number % 2 == 0)
 		{
 			// evens soldiers
-			if($one_number >= 0)
-			{
-				// number of positive zeros
-				$number_of_positive_zeros = substr_count($binary_representation, '0');
-				$number_of_all_zeros += $number_of_positive_zeros;
-			}
-			else
-			{
-				// number of negative zeros
-				$number_of_negative_zeros = substr_count($binary_representation, '0');
-				$number_of_all_zeros -= $number_of_negative_zeros;
-			}
+			$number_of_all_zeros += calculate_evens($one_number, $binary_representation);
 		}
 		else
 		{
 			// odds soldiers
-			if($one_number >= 0)
-			{
-				// number of positive ones
-				$number_of_positive_ones = substr_count($binary_representation, '1');
-				$number_of_all_ones += $number_of_positive_ones;
-			}
-			else
-			{
-				// number of negative ones
-				$number_of_negative_ones = substr_count($binary_representation, '1');
-				$number_of_all_ones -= $number_of_negative_ones;
-			}
+			$number_of_all_ones += calculate_odds($one_number, $binary_representation);
 		}
 	}
 	battle_result($number_of_all_zeros, $number_of_all_ones);
+}
+
+function calculate_evens($number, $binary_representation)
+{
+	$number_of_zeros = 0;
+	
+	if($number >= 0)
+	{
+		// number of positive zeros
+		$number_of_positive_zeros = substr_count($binary_representation, '0');
+		$number_of_zeros += $number_of_positive_zeros;
+	}
+	else
+	{
+		// number of negative zeros
+		$number_of_negative_zeros = substr_count($binary_representation, '0');
+		$number_of_zeros -= $number_of_negative_zeros;
+	}
+	return $number_of_zeros;
+}
+
+function calculate_odds($number, $binary_representation)
+{
+	$number_of_ones = 0;
+
+	if($number >= 0)
+	{
+		// number of positive ones
+		$number_of_positive_ones = substr_count($binary_representation, '1');
+		$number_of_ones += $number_of_positive_ones;
+	}
+	else
+	{
+		// number of negative ones
+		$number_of_negative_ones = substr_count($binary_representation, '1');
+		$number_of_ones -= $number_of_negative_ones;
+	}
+	return $number_of_ones;
 }
 
 /**
