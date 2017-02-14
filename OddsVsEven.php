@@ -34,6 +34,9 @@ function battle($battle_field_configuration)
 	battle_result($number_of_all_zeros, $number_of_all_ones);
 }
 
+/**
+*  Procedural function which calculate the number of bits (the number of zeros or the number of ones).
+*/
 function calculate($number, $binary_representation, $bit)
 {
 	$number_of_bits = 0;
